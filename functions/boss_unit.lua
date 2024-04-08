@@ -30,7 +30,10 @@ end
 
 ---@param event EventData.on_entity_damaged
 local function on_entity_damaged(event)
+	if math.random() < 0.5 then return end -- could be used to maybe make code more computationally efficient, but would have to be rebalanced
 	local entity = event.entity
+	if math.random() < entity.force.evolution_factor * 3 then -- evade mechanic
+		event.final_damage_amount=0 return end
 	local boss = global.boss_units[entity.unit_number]
 	if not boss then return end
 	entity.health = entity.health + event.final_damage_amount
