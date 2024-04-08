@@ -30,6 +30,7 @@ end
 
 ---@param event EventData.on_entity_damaged
 local function on_entity_damaged(event)
+	event.final_damage_amount=event.final_damage_amount* (1-global.reanim_chance[entity.force.index])
 	local entity = event.entity
 	local boss = global.boss_units[entity.unit_number]
 	if not boss then return end
